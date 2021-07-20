@@ -15,15 +15,19 @@ public class Video {
     private String descricao;
     private String url;
 
-    public String getTitulo() {
-        return titulo;
+    public Video() {}
+
+    public Video(String titulo, String descricao, String url) {
+        this.titulo    = titulo;
+        this.descricao = descricao;
+        this.url       = url;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
+    public Long getId() { return this.id; }
 
-    public String getUrl() {
-        return url;
-    }
+    public String getTitulo() { return titulo; }
+
+    public String getDescricao() { return descricao; }
+
+    public String getUrl() { return url; }
 }

@@ -1,6 +1,7 @@
 package com.patrick.aluraflix.controllers;
 
 import com.patrick.aluraflix.controllers.dto.VideoDto;
+import com.patrick.aluraflix.controllers.form.VideoForm;
 import com.patrick.aluraflix.models.Video;
 import com.patrick.aluraflix.repositories.VideosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,5 +40,15 @@ public class VideosController {
         return video.isPresent() ?
                 ResponseEntity.ok(new VideoDto(video.get())) :
                 ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity<VideoDto> create(@RequestBody @Valid VideoForm videoForm, UriComponentsBuilder uriBuilder) {
+        Video video = videoForm.convert();
+        videosRepository.save(video);
+
+        URI uri = uriBuilder.path("/videos/{id}").buildAndExpand(video.getId()).toUri();
+        return ResponseEntity.created(uri).body(new VideoDto(video));
     }
 }
