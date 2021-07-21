@@ -4,7 +4,6 @@ import com.patrick.aluraflix.models.Video;
 import com.patrick.aluraflix.repositories.VideosRepository;
 
 import javax.validation.constraints.NotNull;
-import java.util.Optional;
 
 public class VideoForm {
 
