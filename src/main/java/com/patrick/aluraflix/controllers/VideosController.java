@@ -59,4 +59,17 @@ public class VideosController {
 
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<VideoDto> update(@PathVariable Long id, @RequestBody @Valid VideoForm videoForm) {
+        Optional<Video> optional = videosRepository.findById(id);
+
+        if (optional.isPresent()) {
+            Video video = videoForm.atualizar(id, videosRepository);
+            return ResponseEntity.ok(new VideoDto(video));
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }

@@ -30,4 +30,10 @@ public class Video {
     public String getDescricao() { return descricao; }
 
     public String getUrl() { return url; }
+
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public void setUrl(String url) { this.url = url; }
 }
