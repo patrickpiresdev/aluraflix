@@ -1,15 +1,17 @@
 package com.patrick.aluraflix.controllers;
 
 import com.patrick.aluraflix.controllers.dto.CategoriaDto;
+import com.patrick.aluraflix.controllers.form.CategoriaForm;
 import com.patrick.aluraflix.models.Categoria;
 import com.patrick.aluraflix.repositories.CategoriasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,5 +33,15 @@ public class CategoriasController {
         Optional<Categoria> categoria = categoriasRepository.findById(id);
         if (categoria.isPresent()) return ResponseEntity.ok(new CategoriaDto(categoria.get()));
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity<CategoriaDto> create(@RequestBody @Valid CategoriaForm categoriaForm, UriComponentsBuilder uriBuilder) {
+        Categoria categoria = categoriaForm.convert();
+        categoriasRepository.save(categoria);
+
+        URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
+        return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
     }
 }

@@ -13,11 +13,16 @@ public class Categoria {
     private String titulo;
     private String cor;
 
-    public String getTitulo() {
-        return this.titulo;
+    public Categoria() {}
+
+    public Categoria(String titulo, String cor) {
+        this.titulo = titulo;
+        this.cor = cor;
     }
 
-    public String getCor() {
-        return this.cor;
-    }
+    public String getTitulo() { return this.titulo; }
+
+    public String getCor() { return this.cor; }
+
+    public Long getId() { return this.id; }
 }
