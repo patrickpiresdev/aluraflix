@@ -51,7 +51,8 @@ public class CategoriasController {
         Optional<Categoria> optional = categoriasRepository.findById(id);
 
         if (optional.isPresent()) {
-            Categoria categoria = categoriaForm.atualizar(id, categoriasRepository);
+            Categoria categoria = optional.get();
+            categoria.atualizar(categoriaForm);
             return ResponseEntity.ok(new CategoriaDto(categoria));
         }
 

@@ -18,12 +18,8 @@ public class CategoriaForm {
         this.cor = cor;
     }
 
-    public Categoria convert() { return new Categoria(titulo, cor); }
+    public String getTitulo() { return titulo; }
+    public String getCor() { return cor; }
 
-    public Categoria atualizar(Long id, CategoriasRepository categoriasRepository) {
-        Categoria categoria = categoriasRepository.findById(id).get();
-        categoria.setTitulo(titulo);
-        categoria.setCor(cor);
-        return categoria;
-    }
+    public Categoria convert() { return new Categoria(titulo, cor); }
 }

@@ -1,5 +1,7 @@
 package com.patrick.aluraflix.models;
 
+import com.patrick.aluraflix.controllers.form.CategoriaForm;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,4 +31,9 @@ public class Categoria {
     public void setTitulo(String titulo) { this.titulo = titulo; }
 
     public void setCor(String cor) { this.cor = cor; }
+
+    public void atualizar(CategoriaForm categoriaForm) {
+        this.titulo = categoriaForm.getTitulo();
+        this.cor    = categoriaForm.getCor();
+    }
 }
