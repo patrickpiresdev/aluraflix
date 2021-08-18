@@ -1,6 +1,7 @@
 package com.patrick.aluraflix.controllers.form;
 
 import com.patrick.aluraflix.models.Categoria;
+import com.patrick.aluraflix.repositories.CategoriasRepository;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -18,4 +19,11 @@ public class CategoriaForm {
     }
 
     public Categoria convert() { return new Categoria(titulo, cor); }
+
+    public Categoria atualizar(Long id, CategoriasRepository categoriasRepository) {
+        Categoria categoria = categoriasRepository.findById(id).get();
+        categoria.setTitulo(titulo);
+        categoria.setCor(cor);
+        return categoria;
+    }
 }

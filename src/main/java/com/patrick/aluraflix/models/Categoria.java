@@ -25,4 +25,8 @@ public class Categoria {
     public String getCor() { return this.cor; }
 
     public Long getId() { return this.id; }
+
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+
+    public void setCor(String cor) { this.cor = cor; }
 }

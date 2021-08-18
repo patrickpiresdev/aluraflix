@@ -44,4 +44,17 @@ public class CategoriasController {
         URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<CategoriaDto> update(@PathVariable Long id, @RequestBody @Valid CategoriaForm categoriaForm) {
+        Optional<Categoria> optional = categoriasRepository.findById(id);
+
+        if (optional.isPresent()) {
+            Categoria categoria = categoriaForm.atualizar(id, categoriasRepository);
+            return ResponseEntity.ok(new CategoriaDto(categoria));
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }
