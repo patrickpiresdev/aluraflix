@@ -1,5 +1,7 @@
 package com.patrick.aluraflix.models;
 
+import com.patrick.aluraflix.controllers.form.VideoForm;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,4 +38,10 @@ public class Video {
     public void setDescricao(String descricao) { this.descricao = descricao; }
 
     public void setUrl(String url) { this.url = url; }
+
+    public void atualizar(VideoForm videoForm) {
+        this.titulo    = videoForm.getTitulo();
+        this.descricao = videoForm.getDescricao();
+        this.url       = videoForm.getUrl();
+    }
 }

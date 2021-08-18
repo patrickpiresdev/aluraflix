@@ -66,7 +66,8 @@ public class VideosController {
         Optional<Video> optional = videosRepository.findById(id);
 
         if (optional.isPresent()) {
-            Video video = videoForm.atualizar(id, videosRepository);
+            Video video = optional.get();
+            video.atualizar(videoForm);
             return ResponseEntity.ok(new VideoDto(video));
         }
 

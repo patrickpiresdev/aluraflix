@@ -17,17 +17,11 @@ public class VideoForm {
 
     public void setUrl(String url) { this.url = url; }
 
-    public Video convert() {
-        return new Video(this.titulo, this.descricao, this.url);
-    }
+    public String getTitulo() { return titulo; }
 
-    public Video atualizar(Long id, VideosRepository videosRepository) {
-        Video video = videosRepository.findById(id).get();
+    public String getDescricao() { return descricao; }
 
-        video.setTitulo(this.titulo);
-        video.setDescricao(this.descricao);
-        video.setUrl(this.url);
+    public String getUrl() { return url; }
 
-        return video;
-    }
+    public Video convert() { return new Video(this.titulo, this.descricao, this.url); }
 }
